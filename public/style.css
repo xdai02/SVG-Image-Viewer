@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+}
+
+html {
+    width: 90%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+    background-color: #FFFFFF;
+}
+
+body {
+    height: 100%;
+    min-height: 100%;
+    line-height: 1.75;
+    background-color: #FFFFFF;
+}
+
+a:link:hover {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: underline;
+    cursor: pointer;
+    cursor: hand;
+}
+
+input[type=submit], button {
+    cursor: pointer;
+    cursor: hand;
+}
+
+@media(max-width: 900px) {
+    html {
+        font-size: 14px !important;
+        width: 80% !important;
+    }
+}
+
+@media(max-width: 480px) {
+    html {
+        font-size: 12px !important;
+        width: 90% !important;
+    }
+}
+
+@media(max-width: 320px) {
+    html {
+        font-size: 12px !important;
+        width: 100% !important;
+    }
+}
+
+element.style {
+    height: 120%;
+}
+
+.header {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.title {
+    font-weight: bold;
+    color: #a95508;
+}
+
+hr {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+#top {
+    text-decoration: none;
+    color: #f40;
+}
+
+.anchor {
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    padding: 0 5px;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+#top:hover {
+    color: #fff;
+}
+
+.anchor:hover {
+    background-color: #f40;
+}
+
+.file-log {
+    overflow: auto;
+    width: 100%;
+    /* height: 100% !important; */
+    padding: 5px 15px;
+}
+
+.table {
+    margin-top: 20px;
+    border: 2px solid black;
+    border-collapse: collapse;
+    overflow: auto;
+}
+
+.table .table-head {
+    text-align: center;
+    font-weight: bold;
+    background-color: #a9d0f5;
+}
+
+.svg-view {
+    overflow: auto;
+    width: 100%;
+    padding: 5px 15px;
+}
+
+td {
+    border: 2px solid black;
+    text-align: center;
+    width: 300px;
+    height: 80px;
+}
+
+#thumbnail {
+    width: 200px;
+}
+
+.upload {
+    margin-top: 20px;
+}
+
+#submit {
+    margin-left: 10px;
+    padding: 5px;
+    width: 75px;
+    height: 40px;
+    line-height: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.submit:hover {
+    color: #f40;
+    background-color: #e6e6e6;
+}
+
+.dropdown {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 200px;
+}
+
+#image {
+    width: 800px;
+}
+
+.panel {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#show-list {
+    list-style: none;
+    text-align: left;
+    margin-left: 77px;
+}
+
+.nametag {
+    display: inline-block;
+    text-align: right;
+    width: 120px;
+    vertical-align: top;
+}
+
+.edit {
+    margin-top: 30px;
+    width: 100%;
+    height: 440px;
+    line-height: 50px;
+    border: #999;
+}
+
+.edit-box {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    margin-right: 70px;
+    width: 300px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.submit:hover {
+    color: #f40;
+    background-color: #e6e6e6;
+}
+
+.edit,
+#shape-select,
+#radio-select {
+    border: 1px dashed #a04ce6;
+    width: 600px;
+}
+
+#title-and-description {
+    height: 120px;
+    line-height: 60px;
+}
+
+#edit-attribute {
+    height: 315px;
+}
+
+.edit-attr-box {
+    width: 100px;
+    margin-right: 58px;
+}
+
+#attrValue {
+    margin-left: -100px;
+}
+
+.add-shape-btn, 
+#scale-btn {
+    margin-top: 20px;
+    margin-left: 250px;
+    margin-bottom: 20px;
+}
+
+#add-circ-btn {
+    margin-top: 15px;
+}
+
+#create-svg {
+    height: 200px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.scale-btn {
+    margin: 10px 15px;
+}
+
+#shape-select {
+    margin-top: 20px;
+}
+
+#radio-select {
+    height: 100px;
+    line-height: 40px;
+}

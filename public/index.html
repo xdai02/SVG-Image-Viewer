@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SVG Image Viewer">
+    <meta name="keywords" content="SVG">
+    <meta name="author" content="Xiaotian Dai">
+    <title>SVG Image Viewer</title>
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <!-- header of page -->
+    <div class="header" id="header">
+        <h1>SVG Image Viewer</h2>
+    </div>
+
+    <hr>
+    
+    <!-- back to top -->
+    <a href="#header" id="top">
+        <div class="anchor">TOP</div>
+    </a>
+
+    <!-- file log panel -->
+    <h3 class="title">File Log Panel</h3>
+    <div class="file-log panel">
+        <table class="table">
+            <thead class="table-head">
+                <tr>
+                    <td>Image<br>(click to download)</td>
+                    <td>File name<br>(click to download)</td>
+                    <td>File size</td>
+                    <td>Number of rectangles</td>
+                    <td>Number of circles</td>
+                    <td>Number of paths</td>
+                    <td>Number of groups</td>
+                </tr>
+            </thead>
+            <tbody class="table-body" id="log-body">
+            </tbody>    
+        </table>
+    </div>
+    <!-- upload file -->
+    <form action="/upload" method="post" enctype="multipart/form-data" id="upload-form">
+        <input type="file" value="Upload file" class="btn" id="upload" name="uploadFile" required>
+        <input type="submit" value="Submit" class="btn submit" id="submit">
+    </form>
+    <hr>
+
+    <!-- svg view panel -->
+    <h3 class="title">SVG View Panel</h3>
+    <select class="dropdown" id="file-drop-list" onchange="showSVGInfo();">
+    </select>
+    <div class="svg-view panel">
+        <table class="table" id="svg-view-table">
+            <tr>
+                <td colspan="6">
+                    <img id="image">
+                </td>
+            </tr>
+            <tr class="table-head">
+                <td colspan="3">Title</td>
+                <td colspan="3">Description</td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td colspan="3"></td>
+            </tr>
+            <tr class="table-head">
+                <td colspan="1">Component</td>
+                <td colspan="4">Summary</td>
+                <td colspan="1">Other attributes</td>
+            </tr>
+            <tr>
+                <td colspan="1"></td>
+                <td colspan="4"></td>
+                <td colspan="1"></td>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <h3 class="title">Edit SVG Image</h3>
+    <!-- edit title and description -->
+    <div class="edit" id="title-and-description">
+        <div id="title">
+            <span class="nametag">title</span>
+            <input type="text" class="edit-box" id="edit-title-text" maxlength="255">
+            <input type="submit" value="edit" class="btn submit" id="edit-title" onclick="editTitle();showSVGInfo();">
+        </div>
+        <div id="description">
+            <span class="nametag">description</span>
+            <input type="text" class="edit-box" id="edit-desc-text" maxlength="255">
+            <input type="submit" value="edit" class="btn submit" id="edit-desc" onclick="editDesc();showSVGInfo();">
+        </div>
+    </div>
+
+    <!-- edit svg components -->
+    <div class="edit" id="edit-attribute">
+        <span class="nametag">Components</span>
+        <select class="dropdown" id="component-drop-list" onchange="showComponent();">
+            <option>-- Select --</option>
+        </select>
+        <div id="select-attribute">
+        </div>
+    </div>
+
+    <!-- add shape -->
+    <div class="edit" id="add-shape">
+        <span class="nametag">Add Shape</span>
+        <select class="dropdown" id="shape-list" onchange="showAddShape();showSVGInfo();">
+            <option>-- Select --</option>
+            <option>Rectangle</option>
+            <option>Circle</option>
+        </select>
+        <div id="shape-attribute">
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- create a new svg file -->
+    <h3 class="title">Create SVG Image</h3>
+    <div class="edit" id="create-svg">
+        <div id="filename">
+            <span class="nametag">file name</span>
+            <input type="text" class="edit-box" id="filename-text">
+        </div>
+        <div id="title">
+            <span class="nametag">title</span>
+            <input type="text" class="edit-box" id="title-text">
+        </div>
+        <div id="description">
+            <span class="nametag">description</span>
+            <input type="text" class="edit-box" id="description-text">
+        </div>
+        <input type="submit" value="Create" class="btn submit" id="create-btn" onclick="createSVG();">
+    </div>
+
+    <hr>
+
+    <!-- scale shapes -->
+    <h3 class="title">Scale Shapes</h3>
+    <div class="scale-shape">
+        <div id="shape-select">
+            <span class="scale-btn">
+                <input name="scale-shape" type="radio" value="rectangles" id="scale-rect" checked="checked"> rectangles
+            </span>
+            <span class="scale-btn">
+                <input name="scale-shape" type="radio" value="circles" id="scale-circ"> circles
+            </span>
+        </div>
+        <div id="radio-select">
+            <span class="scale-btn">
+                <input name="scale-factor" type="radio" value="0.5" id="0.5-scale"> 0.5x
+            </span>
+            <span class="scale-btn">
+                <input name="scale-factor" type="radio" value="1.0" checked="checked"> 1.0x
+            </span>
+            <span class="scale-btn">
+                <input name="scale-factor" type="radio" value="1.5"> 1.5x
+            </span>
+            <span class="scale-btn">
+                <input name="scale-factor" type="radio" value="2.0"> 2.0x
+            </span>
+            <span class="scale-btn">
+                <input name="scale-factor" type="radio" value="3.0"> 3.0x
+            </span>
+            <span class="scale-btn">
+                <input name="scale-factor" type="radio" value="4.0"> 4.0x
+            </span>
+            <div class="scale-btn" id="other-scale">
+                <input name="scale-factor" type="radio" value="other"> other
+                <input type="text" class="edit-box" id="scale-text">
+            </div>
+        </div>
+        <input type="submit" value="Scale Shape" class="btn submit" id="scale-btn" onclick="scaleShapes();loadAllFiles(false);showSVGInfo();">
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <script src="index.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
